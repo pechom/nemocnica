@@ -14,10 +14,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @author Judita
  */
 public enum DaoFactory {
-    
-    
+
     INSTANCE;
-    
+
     private ZaznamDAO mysqlZaznamDao;
     private LekarDAO lekarDao;
     private PacientDAO pacientDao;
@@ -25,67 +24,69 @@ public enum DaoFactory {
     private DiagnozaDAO diagnozaDao;
     private LiecbaDAO liecbaDao;
     private PouzivatelDAO pouzivatelDao;
-    public ZaznamDAO getZaznamDao(){
+
+    public ZaznamDAO getZaznamDao() {
         return getMysqlZaznamDao();
     }
 
     private ZaznamDAO getMysqlZaznamDao() {
-        if(mysqlZaznamDao == null){
+        if (mysqlZaznamDao == null) {
             mysqlZaznamDao = new MysqlZaznamDao(getJdbcTemplate());
         }
         return mysqlZaznamDao;
     }
-    
+
     // prepojenie k databáze
-    public JdbcTemplate getJdbcTemplate(){
+    public JdbcTemplate getJdbcTemplate() {
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost/nemocnica");
+        dataSource.setDatabaseName("nemocnica-test");
+        dataSource.setURL("jdbc:mysql://localhost/nemocnica?serverTimezone=Europe/Bratislava");
         dataSource.setUser("root");
-        dataSource.setPassword("Kope1234");
+        dataSource.setPassword("yareyare");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return jdbcTemplate;
     }
-    
-    public LekarDAO getLekarDao(){
-        if(lekarDao == null){
+
+    public LekarDAO getLekarDao() {
+        if (lekarDao == null) {
             lekarDao = new MysqlLekarDao(getJdbcTemplate());
         }
         return lekarDao;
     }
-    
-    public PacientDAO getPacientDao(){
-        if(pacientDao == null){
+
+    public PacientDAO getPacientDao() {
+        if (pacientDao == null) {
             pacientDao = new MysqlPacientDao(getJdbcTemplate());
         }
         return pacientDao;
     }
-      
-    public DiagnozaDAO getDiagnozaDao(){
-        if(diagnozaDao == null){
+
+    public DiagnozaDAO getDiagnozaDao() {
+        if (diagnozaDao == null) {
             diagnozaDao = new MysqlDiagnozaDao(getJdbcTemplate());
         }
         return diagnozaDao;
     }
-        
-    public LiekDAO getLiekDao(){
-        if(liekDao == null){
+
+    public LiekDAO getLiekDao() {
+        if (liekDao == null) {
             liekDao = new MysqlLiekDao(getJdbcTemplate());
         }
         return liekDao;
     }
-    public LiecbaDAO getLiecbaDao(){
-        if(liecbaDao == null){
+
+    public LiecbaDAO getLiecbaDao() {
+        if (liecbaDao == null) {
             liecbaDao = new MysqlLiecbaDao(getJdbcTemplate());
         }
         return liecbaDao;
     }
-    
-     public PouzivatelDAO getPouzivatelDao(){
-        if(pouzivatelDao == null){
+
+    public PouzivatelDAO getPouzivatelDao() {
+        if (pouzivatelDao == null) {
             pouzivatelDao = new MysqlPouzivatelDao(getJdbcTemplate());
         }
         return pouzivatelDao;
     }
 
-   
 }
