@@ -12,5 +12,7 @@ public interface PouzivatelDAO {
     void zmenHeslo(Pouzivatel pouzivatel);
     
     Boolean checkMenoAHeslo(String meno, String heslo);
-    }
-
+    
+    
+    Pouzivatel najdiPouzivatela(String meno);
+}

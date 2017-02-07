@@ -18,5 +18,7 @@ public interface LiecbaDAO {
     void upravLiecbu(Liecba liecba);
     
     public void ulozLiecbu(Liecba liecba);
+    
+    void vymazLiecbu(Liecba liecba);
 }
 

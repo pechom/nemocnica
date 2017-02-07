@@ -13,5 +13,5 @@ public interface ZaznamDAO {
     
     void vymazZaznam(Zaznam zaznam);
     
-    
+    List<Zaznam> dajZaznamyPouzivatela(Pouzivatel pouzivatel);
 }

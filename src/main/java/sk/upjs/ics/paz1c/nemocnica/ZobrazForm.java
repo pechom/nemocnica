@@ -1,16 +1,32 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sk.upjs.ics.paz1c.nemocnica;
 
-public class DetailForm extends javax.swing.JFrame {
+/**
+ *
+ * @author szoplakz
+ */
+public class ZobrazForm extends javax.swing.JDialog {
 
+    /**
+     * Creates new form ZobrazForm
+     */
     private Zaznam zaznam;
+    private Pouzivatel pouzivatel;
     
-    public DetailForm() {
+        
+    
+    public ZobrazForm(java.awt.Dialog parent, boolean modal,Zaznam zaznam, Pouzivatel pouzivatel) {
+        super(parent, modal);
         initComponents();
-    }
-    
-    // vypisanie vybrateho zaznamu
-    public void detailZaznam(Zaznam zaznam){
+        
+        
+        this.setSize(830, 470);
         this.zaznam = zaznam;
+        this.pouzivatel=pouzivatel;
         
         menoLekarDetailjLabel.setText("Meno : " + zaznam.getLekar().getMeno());
         priezviskoLekarDetailjLabel.setText("Priezvisko : " + zaznam.getLekar().getPriezvisko());
@@ -36,44 +52,27 @@ public class DetailForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        okDetailButton = new javax.swing.JButton();
-        detailLabel = new javax.swing.JLabel();
         lekarDetailjLabel = new javax.swing.JLabel();
+        detailLabel = new javax.swing.JLabel();
         pacientDetailjLabel = new javax.swing.JLabel();
-        menoLekarDetailjLabel = new javax.swing.JLabel();
-        priezviskoLekarDetailjLabel = new javax.swing.JLabel();
-        specLekarDetailjLabel = new javax.swing.JLabel();
         menoPacientDetailjLabel = new javax.swing.JLabel();
         priezviskoPacientDetailjLabel = new javax.swing.JLabel();
         vekPacientDetailjLabel = new javax.swing.JLabel();
+        specLekarDetailjLabel = new javax.swing.JLabel();
+        priezviskoLekarDetailjLabel = new javax.swing.JLabel();
+        menoLekarDetailjLabel = new javax.swing.JLabel();
         diagnozaDetailjLabel = new javax.swing.JLabel();
         diagnozaNazovDetailjLabel = new javax.swing.JLabel();
+        liecbaDetailjLabel = new javax.swing.JLabel();
+        liecbaNazovDetailjLabel = new javax.swing.JLabel();
         liekDetailjLabel = new javax.swing.JLabel();
         nazovLiekDetailjLabel = new javax.swing.JLabel();
         upravitjButton = new javax.swing.JButton();
-        liecbaDetailjLabel = new javax.swing.JLabel();
-        liecbaNazovDetailjLabel = new javax.swing.JLabel();
+        okDetailButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        okDetailButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        okDetailButton.setForeground(new java.awt.Color(0, 102, 0));
-        okDetailButton.setText("OK");
-        okDetailButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okDetailButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(okDetailButton);
-        okDetailButton.setBounds(418, 412, 93, 33);
-
-        detailLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        detailLabel.setForeground(new java.awt.Color(0, 102, 0));
-        detailLabel.setText("Detail záznamu");
-        getContentPane().add(detailLabel);
-        detailLabel.setBounds(302, 11, 139, 22);
 
         lekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
@@ -82,29 +81,17 @@ public class DetailForm extends javax.swing.JFrame {
         getContentPane().add(lekarDetailjLabel);
         lekarDetailjLabel.setBounds(10, 39, 56, 22);
 
+        detailLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        detailLabel.setForeground(new java.awt.Color(0, 102, 0));
+        detailLabel.setText("Detail záznamu");
+        getContentPane().add(detailLabel);
+        detailLabel.setBounds(302, 11, 139, 22);
+
         pacientDetailjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         pacientDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
         pacientDetailjLabel.setText("Pacient ");
         getContentPane().add(pacientDetailjLabel);
         pacientDetailjLabel.setBounds(418, 42, 73, 17);
-
-        menoLekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        menoLekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
-        menoLekarDetailjLabel.setText("Meno :");
-        getContentPane().add(menoLekarDetailjLabel);
-        menoLekarDetailjLabel.setBounds(31, 79, 351, 20);
-
-        priezviskoLekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        priezviskoLekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
-        priezviskoLekarDetailjLabel.setText("Priezvisko :");
-        getContentPane().add(priezviskoLekarDetailjLabel);
-        priezviskoLekarDetailjLabel.setBounds(31, 120, 351, 20);
-
-        specLekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        specLekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
-        specLekarDetailjLabel.setText("Špecializácia :");
-        getContentPane().add(specLekarDetailjLabel);
-        specLekarDetailjLabel.setBounds(31, 170, 351, 20);
 
         menoPacientDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         menoPacientDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
@@ -124,6 +111,24 @@ public class DetailForm extends javax.swing.JFrame {
         getContentPane().add(vekPacientDetailjLabel);
         vekPacientDetailjLabel.setBounds(448, 170, 371, 20);
 
+        specLekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        specLekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
+        specLekarDetailjLabel.setText("Špecializácia :");
+        getContentPane().add(specLekarDetailjLabel);
+        specLekarDetailjLabel.setBounds(31, 170, 351, 20);
+
+        priezviskoLekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        priezviskoLekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
+        priezviskoLekarDetailjLabel.setText("Priezvisko :");
+        getContentPane().add(priezviskoLekarDetailjLabel);
+        priezviskoLekarDetailjLabel.setBounds(31, 120, 351, 20);
+
+        menoLekarDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        menoLekarDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
+        menoLekarDetailjLabel.setText("Meno :");
+        getContentPane().add(menoLekarDetailjLabel);
+        menoLekarDetailjLabel.setBounds(31, 79, 351, 20);
+
         diagnozaDetailjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         diagnozaDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
         diagnozaDetailjLabel.setText("Diagnóza ");
@@ -135,6 +140,18 @@ public class DetailForm extends javax.swing.JFrame {
         diagnozaNazovDetailjLabel.setText("Názov :");
         getContentPane().add(diagnozaNazovDetailjLabel);
         diagnozaNazovDetailjLabel.setBounds(33, 277, 349, 20);
+
+        liecbaDetailjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        liecbaDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
+        liecbaDetailjLabel.setText("Liečba");
+        getContentPane().add(liecbaDetailjLabel);
+        liecbaDetailjLabel.setBounds(20, 316, 58, 22);
+
+        liecbaNazovDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        liecbaNazovDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
+        liecbaNazovDetailjLabel.setText("Názov :");
+        getContentPane().add(liecbaNazovDetailjLabel);
+        liecbaNazovDetailjLabel.setBounds(43, 356, 349, 20);
 
         liekDetailjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         liekDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
@@ -159,74 +176,36 @@ public class DetailForm extends javax.swing.JFrame {
         getContentPane().add(upravitjButton);
         upravitjButton.setBounds(256, 412, 94, 33);
 
-        liecbaDetailjLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        liecbaDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
-        liecbaDetailjLabel.setText("Liečba");
-        getContentPane().add(liecbaDetailjLabel);
-        liecbaDetailjLabel.setBounds(20, 316, 58, 22);
-
-        liecbaNazovDetailjLabel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        liecbaNazovDetailjLabel.setForeground(new java.awt.Color(0, 102, 0));
-        liecbaNazovDetailjLabel.setText("Názov :");
-        getContentPane().add(liecbaNazovDetailjLabel);
-        liecbaNazovDetailjLabel.setBounds(43, 356, 349, 20);
+        okDetailButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        okDetailButton.setForeground(new java.awt.Color(0, 102, 0));
+        okDetailButton.setText("OK");
+        okDetailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okDetailButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(okDetailButton);
+        okDetailButton.setBounds(418, 412, 93, 33);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Background.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 830, 470);
+        jLabel1.setBounds(0, 0, 700, 460);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okDetailButtonActionPerformed
-        dispose();
-    }//GEN-LAST:event_okDetailButtonActionPerformed
-
-    // zobrazenie okna upravit
     private void upravitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upravitjButtonActionPerformed
-        UpravitForm upravitForm = new UpravitForm();
-        // nacitanie hodnot do upravit formu
-        upravitForm.doUpravitForm(zaznam);
-        upravitForm.setVisible(true);
-        upravitForm.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        ModifikujZaznam pridajUpravZaznamForm = new ModifikujZaznam(this, true, true, zaznam,pouzivatel);
+        pridajUpravZaznamForm.setVisible(true);
+
         this.setVisible(false);
     }//GEN-LAST:event_upravitjButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DetailForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void okDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okDetailButtonActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_okDetailButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DetailForm().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel detailLabel;

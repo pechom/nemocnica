@@ -19,6 +19,16 @@ public class mysqlZaznamDaoTest {
     public mysqlZaznamDaoTest() {
     }
     
+    @Test
+    public void testPridajZaznam(){
+        Zaznam zaznam = new Zaznam();
+        MysqlPacientDao instance = new MysqlPacientDao(DaoFactory.INSTANCE.getJdbcTemplate());
+        
+        
+        
+        
+    }
+    
      @Test
     public void testDajZaznamy(){
         System.out.println("Daj zaznamy");

@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * @author Judita
  */
-public enum DaoFactory {
+public enum TestFactory {
     
     
     INSTANCE;
@@ -39,7 +39,7 @@ public enum DaoFactory {
     // prepojenie k databáze
     public JdbcTemplate getJdbcTemplate(){
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost/nemocnica");
+        dataSource.setUrl("jdbc:mysql://localhost/nemocnicaTest");
         dataSource.setUser("root");
         dataSource.setPassword("Kope1234");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -89,3 +89,4 @@ public enum DaoFactory {
 
    
 }
+

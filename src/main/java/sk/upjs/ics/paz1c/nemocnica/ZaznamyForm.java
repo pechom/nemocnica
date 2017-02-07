@@ -2,17 +2,21 @@ package sk.upjs.ics.paz1c.nemocnica;
 
 import java.util.List;
 import javax.swing.JOptionPane;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class ZaznamyForm extends javax.swing.JFrame {
+public class ZaznamyForm extends javax.swing.JDialog {
 
     private ZaznamTableModel model;
+    private Pouzivatel pouzivatel;
     
-    public ZaznamyForm() {
-        initComponents(); 
+    public ZaznamyForm(java.awt.Dialog parent, boolean modal, Pouzivatel pouzivatel) {
+        super(parent, modal);
+        initComponents();
+        this.pouzivatel=pouzivatel;
+        this.setSize(590, 457);
         aktualizovatZaznamy();
-        zaznamyjTable.setOpaque(false);
+        
 
 
     }
@@ -45,7 +49,6 @@ public class ZaznamyForm extends javax.swing.JFrame {
         PridatLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         zaznamyLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -129,7 +132,7 @@ public class ZaznamyForm extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Background.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 620, 370);
+        jLabel1.setBounds(0, 0, 590, 360);
 
         pack();
         setLocationRelativeTo(null);
@@ -137,9 +140,9 @@ public class ZaznamyForm extends javax.swing.JFrame {
 
     // zobrazenie pridat formu
     private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
-        PridatForm pridatForm = new PridatForm();
-        pridatForm.setVisible(true);
-        pridatForm.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        ModifikujZaznam pridajUpravZaznamForm = new ModifikujZaznam(this, true, false, null,pouzivatel);
+        pridajUpravZaznamForm.setVisible(true);
+        
     }//GEN-LAST:event_pridatButtonActionPerformed
 
     // zmazanie zaznamu, je potrebne oznacit zaznam
@@ -181,9 +184,9 @@ public class ZaznamyForm extends javax.swing.JFrame {
             int riadok = zaznamyjTable.getSelectedRow();
             Zaznam zaznam = ((ZaznamTableModel) zaznamyjTable.getModel()).getZaznamAt(riadok);
             
-            DetailForm detailForm = new DetailForm();
-            detailForm.detailZaznam(zaznam);
-            detailForm.setVisible(true);
+            ZobrazForm zobrazForm = new ZobrazForm(this,true,zaznam,pouzivatel);
+            
+            zobrazForm.setVisible(true);
             
             aktualizovatZaznamy();
         }

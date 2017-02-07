@@ -9,12 +9,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+
 
 public class MysqlZaznamDao implements ZaznamDAO {
     
@@ -29,7 +31,7 @@ public class MysqlZaznamDao implements ZaznamDAO {
 
     @Override
     public List<Zaznam> dajZaznamy() {
-        String sql = "SELECT lekar_id,pacient_id,diagnoza_id,liek_id,liecba_id,liecba_id,pouzivatel_id FROM zaznam";
+        String sql = "SELECT id,lekar_id,pacient_id,diagnoza_id,liek_id,liecba_id,pouzivatel_id FROM zaznam";
         return jdbcTmplate.query(sql, new ZaznamResultSetExtractor());       
     }
 
@@ -49,14 +51,36 @@ public class MysqlZaznamDao implements ZaznamDAO {
 
     @Override
     public void upravZaznam(Zaznam zaznam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE zaznam SET lekar_id = ?, pacient_id = ?, diagnoza_id = ? , liek_id = ?, liecba_id = ?, pouzivatel_id = ? WHERE id = ?";
+        jdbcTmplate.update(sql,zaznam.getLekar().getId(),
+                zaznam.getPacient().getId(), 
+                zaznam.getDiagnoza().getId(),
+                zaznam.getLiek().getId(),
+                 zaznam.getLiecba().getId(),
+                 zaznam.getPouzivatel().getId(),
+                 zaznam.getId());
+    
     }
 
     @Override
     public void vymazZaznam(Zaznam zaznam) {
-        String sql = "DELETE FROM zaznam WHERE lekar_id=? AND pacient_id=? AND diagnoza_id=? AND liek_id=? AND liecba_id=? AND pouzivatel_id=? LIMIT 1";
-        jdbcTmplate.update(sql, zaznam.getLekar().getId(), zaznam.getPacient().getId(), 
-                                zaznam.getDiagnoza().getId(), zaznam.getLiek().getId(), zaznam.getLiecba().getId(),zaznam.getPouzivatel().getId());
+        String sql = "DELETE FROM zaznam WHERE id=? LIMIT 1";
+        jdbcTmplate.update(sql, zaznam.getId());
+    }
+    
+    @Override
+    public List<Zaznam> dajZaznamyPouzivatela( Pouzivatel pouzivatel) {
+    List<Zaznam> mojezaznamy = new ArrayList<>();
+    List<Zaznam> zaznamy = dajZaznamy();
+        for (Zaznam zaznam : zaznamy) {
+            if(zaznam.getPouzivatel()==pouzivatel){
+            mojezaznamy.add(zaznam);
+            }
+            
+            
+            
+        }
+        return mojezaznamy;
     }
 
 
@@ -108,12 +132,14 @@ public class MysqlZaznamDao implements ZaznamDAO {
             // nastavenie ideciek pre zaznam
             while(rs.next()) {
                 Zaznam zaznam = new Zaznam();
+                int id = rs.getInt("id");
                 int lekarId = rs.getInt("lekar_id");
                 int pacientId = rs.getInt("pacient_id");
                 int diagnozaId = rs.getInt("diagnoza_id");
                 int liekId = rs.getInt("liek_id");
                 int liecbaId = rs.getInt("liecba_id");
                 int pouzivatelId = rs.getInt("pouzivatel_id");
+                zaznam.setId(id);
                 zaznam.setLekar(lekariMap.get(lekarId));         
                 zaznam.setPacient(pacientiMap.get(pacientId));
                 zaznam.setDiagnoza(diagnozyMap.get(diagnozaId));

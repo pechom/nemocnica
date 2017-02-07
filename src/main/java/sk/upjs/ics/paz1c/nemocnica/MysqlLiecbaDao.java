@@ -53,7 +53,7 @@ public class MysqlLiecbaDao implements LiecbaDAO {
            jdbcTemplate.update(sql,liecba.getNazov(),liecba.getId()); 
         }
     }
-
+     @Override
     public void vymazLiecbu(Liecba liecba) {
         String sql = "DELETE FROM liecba WHERE id=? LIMIT 1";
         jdbcTemplate.update(sql, liecba.getId());

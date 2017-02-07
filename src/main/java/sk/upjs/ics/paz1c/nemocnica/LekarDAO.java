@@ -13,4 +13,6 @@ public interface LekarDAO {
     
     public void ulozLekara(Lekar lekar);
     
+    void vymazLekara(Lekar lekar);
+    
 }

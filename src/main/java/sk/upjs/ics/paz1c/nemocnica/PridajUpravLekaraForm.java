@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.nemocnica;
 
+import java.awt.Dialog;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,6 +24,7 @@ public class PridajUpravLekaraForm extends javax.swing.JDialog {
     public PridajUpravLekaraForm(java.awt.Dialog parent, boolean modal, boolean uprav, Lekar lekar) {
         super(parent, modal);
         initComponents();
+        this.setSize(540, 230);
         this.uprav = uprav;
         
          if(uprav){
@@ -103,17 +106,20 @@ public class PridajUpravLekaraForm extends javax.swing.JDialog {
 
     private void PridajUpravButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PridajUpravButtonActionPerformed
         if(uprav){
-          lekar.setMeno(MenoTextField.getName());
-          lekar.setPriezvisko(PriezviskoTextField.getName());
-          lekar.setSpecializacia(SpecializaciaTextField.getName());
+          lekar.setMeno(MenoTextField.getText());
+          lekar.setPriezvisko(PriezviskoTextField.getText());
+          lekar.setSpecializacia(SpecializaciaTextField.getText());
           lekarDao.upravLekara(lekar);
         } else {
             lekar = new Lekar();
-             lekar.setMeno(MenoTextField.getName());
-          lekar.setPriezvisko(PriezviskoTextField.getName());
-          lekar.setSpecializacia(SpecializaciaTextField.getName());
+             lekar.setMeno(MenoTextField.getText());
+          lekar.setPriezvisko(PriezviskoTextField.getText());
+          lekar.setSpecializacia(SpecializaciaTextField.getText());
           lekarDao.pridajLekara(lekar);
         }
+            LekarForm lekarform = new LekarForm((Dialog) this.getParent().getParent(),true);
+            this.getParent().setVisible(false);
+            lekarform.setVisible(true);
             this.setVisible(false);
             
     }//GEN-LAST:event_PridajUpravButtonActionPerformed

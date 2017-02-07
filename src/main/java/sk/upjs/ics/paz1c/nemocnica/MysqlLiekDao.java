@@ -53,9 +53,11 @@ public class MysqlLiekDao implements LiekDAO {
            jdbcTemplate.update(sql,liek.getNazov(),liek.getId()); 
         }
     }
-    
+      @Override
      public void vymazLiek(Liek liek) {
         String sql = "DELETE FROM liek WHERE id=? LIMIT 1";
         jdbcTemplate.update(sql, liek.getId());
     }
+     
+      
 }

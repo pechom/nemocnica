@@ -42,7 +42,7 @@ public class MysqlLekarDao implements LekarDAO {
            jdbcTemplate.update(sql,lekar.getMeno(), lekar.getPriezvisko(), lekar.getSpecializacia(), lekar.getId()); 
         }
     }
-    
+     @Override
     public void vymazLekara(Lekar lekar) {
         String sql = "DELETE FROM lekar WHERE id=? LIMIT 1";
         jdbcTemplate.update(sql, lekar.getId());

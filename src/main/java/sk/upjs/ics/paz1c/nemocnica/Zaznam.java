@@ -9,8 +9,9 @@ import sk.upjs.ics.paz1c.nemocnica.Lekar;
 import java.util.Scanner;
 
 public class Zaznam {
-    
-    
+
+   
+    private int id;
     private Pouzivatel pouzivatel;
     private Lekar lekar;
     private Pacient pacient;
@@ -18,6 +19,15 @@ public class Zaznam {
     private Liek liek;
     private Liecba liecba;
 
+     public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     public Lekar getLekar() {
         return lekar;
     }

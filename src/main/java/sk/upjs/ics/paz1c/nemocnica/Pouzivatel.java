@@ -11,8 +11,8 @@ package sk.upjs.ics.paz1c.nemocnica;
  */
 public class Pouzivatel {
    private int id;
-    private String meno;
-    private String heslo;
+    private String login;
+    private String password;
      
 
     public int getId() {
@@ -23,20 +23,20 @@ public class Pouzivatel {
         this.id = id;
     }
 
-    public String getMeno() {
-        return meno;
+    public String getLogin() {
+        return login;
     }
 
-    public void setMeno(String meno) {
-        this.meno = meno;
+    public void setLogin(String meno) {
+        this.login = meno;
     }
 
-    public String getHeslo() {
-        return heslo;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHeslo(String heslo) {
-        this.heslo = heslo;
+    public void setPassword(String heslo) {
+        this.password = heslo;
     }
 
   

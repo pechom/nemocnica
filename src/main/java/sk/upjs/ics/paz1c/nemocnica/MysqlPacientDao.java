@@ -42,7 +42,7 @@ public class MysqlPacientDao implements PacientDAO {
            jdbcTemplate.update(sql,pacient.getMeno(), pacient.getPriezvisko(), pacient.getVek(), pacient.getId()); 
         }
     }
-    
+     @Override
      public void vymazPacienta(Pacient pacient) {
         String sql = "DELETE FROM pacient WHERE id=? LIMIT 1";
         jdbcTemplate.update(sql, pacient.getId());

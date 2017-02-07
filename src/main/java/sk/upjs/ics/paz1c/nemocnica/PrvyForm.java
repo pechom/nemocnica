@@ -10,6 +10,8 @@ public class PrvyForm extends javax.swing.JFrame {
         
        
         initComponents();
+        this.setSize(480, 280);
+        
         
     }
 
@@ -17,13 +19,19 @@ public class PrvyForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
         prihlasenieLabel = new javax.swing.JLabel();
         prihlasovacieMenoLabel = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
         prihlasovacieHesloLabel = new javax.swing.JLabel();
         prihlasovacieMenoTextField = new javax.swing.JTextField();
-        prihlasovacieHesloTextField = new javax.swing.JPasswordField();
         prihlasitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        jPasswordField1.setText("jPasswordField1");
+
+        jPasswordField2.setText("jPasswordField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
@@ -41,6 +49,8 @@ public class PrvyForm extends javax.swing.JFrame {
         prihlasovacieMenoLabel.setText("Prihlasovacie meno:");
         getContentPane().add(prihlasovacieMenoLabel);
         prihlasovacieMenoLabel.setBounds(40, 80, 140, 30);
+        getContentPane().add(PasswordField);
+        PasswordField.setBounds(190, 120, 220, 30);
 
         prihlasovacieHesloLabel.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         prihlasovacieHesloLabel.setForeground(new java.awt.Color(0, 102, 0));
@@ -56,14 +66,6 @@ public class PrvyForm extends javax.swing.JFrame {
         getContentPane().add(prihlasovacieMenoTextField);
         prihlasovacieMenoTextField.setBounds(190, 80, 220, 32);
 
-        prihlasovacieHesloTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prihlasovacieHesloTextFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(prihlasovacieHesloTextField);
-        prihlasovacieHesloTextField.setBounds(190, 120, 220, 34);
-
         prihlasitButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         prihlasitButton.setForeground(new java.awt.Color(0, 102, 0));
         prihlasitButton.setText("PRIHLÁSIŤ");
@@ -78,7 +80,7 @@ public class PrvyForm extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Background.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 470, 260);
+        jLabel1.setBounds(-10, 0, 480, 260);
 
         pack();
         setLocationRelativeTo(null);
@@ -88,16 +90,19 @@ public class PrvyForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_prihlasovacieMenoTextFieldActionPerformed
 
-    private void prihlasovacieHesloTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prihlasovacieHesloTextFieldActionPerformed
-        
-    }//GEN-LAST:event_prihlasovacieHesloTextFieldActionPerformed
-
     private void prihlasitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prihlasitButtonActionPerformed
         
-        
-        if(pouzivatelDao.checkMenoAHeslo(prihlasovacieMenoTextField.getText(), prihlasovacieHesloTextField.getText())) {
-            ZaznamyForm druhyForm = new ZaznamyForm();
-            druhyForm.setVisible(true);
+        char[] zapisaneHeslo =PasswordField.getPassword();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < zapisaneHeslo.length; i++) {
+            sb.append(zapisaneHeslo[i]);
+        }
+        String heslo = sb.toString();
+        System.out.println(heslo);
+        if(pouzivatelDao.checkMenoAHeslo(prihlasovacieMenoTextField.getText(), heslo)) {
+           Pouzivatel pouzivatel = pouzivatelDao.najdiPouzivatela(prihlasovacieMenoTextField.getText());
+            ProfilForm profilForm = new ProfilForm(this, true, pouzivatel);
+            profilForm.setVisible(true);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Nesprávne zadané prihlasovacie meno alebo heslo !");
@@ -140,11 +145,13 @@ public class PrvyForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JLabel prihlasenieLabel;
     private javax.swing.JButton prihlasitButton;
     private javax.swing.JLabel prihlasovacieHesloLabel;
-    private javax.swing.JTextField prihlasovacieHesloTextField;
     private javax.swing.JLabel prihlasovacieMenoLabel;
     private javax.swing.JTextField prihlasovacieMenoTextField;
     // End of variables declaration//GEN-END:variables

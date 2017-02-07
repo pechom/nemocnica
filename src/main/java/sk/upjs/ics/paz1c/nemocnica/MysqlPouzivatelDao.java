@@ -9,49 +9,69 @@ import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class MysqlPouzivatelDao implements PouzivatelDAO {
 
+public class MysqlPouzivatelDao implements PouzivatelDAO {
+    
     private JdbcTemplate jdbcTemplate;
 
     public MysqlPouzivatelDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
+   
     @Override
     public List<Pouzivatel> dajPouzivatelov() {
-        String sql = "SELECT * FROM pouzivatel";
+       String sql = "SELECT * FROM pouzivatel";
         BeanPropertyRowMapper<Pouzivatel> rowMapper = new BeanPropertyRowMapper<>(Pouzivatel.class);
         return jdbcTemplate.query(sql, rowMapper);
     }
-
+    
     @Override
     public void upravPouzivatela(Pouzivatel pouzivatel) {
-        String sql = "UPDATE pouzivatel SET meno=? WHERE id=?";
-        jdbcTemplate.update(sql, pouzivatel.getMeno(), pouzivatel.getId());
+        String sql = "UPDATE pouzivatel SET login=? WHERE id=?";
+        jdbcTemplate.update(sql, pouzivatel.getLogin(), pouzivatel.getId());
     }
-
-    @Override
+    
+     @Override
     public void zmenHeslo(Pouzivatel pouzivatel) {
-        String sql = "UPDATE pouzivatel SET "
-                + "heslo=? "
-                + "WHERE id=?";
-
-        jdbcTemplate.update(sql, pouzivatel.getHeslo(), pouzivatel.getId());
+        String sql    = "UPDATE pouzivatel SET "
+            + "password=? "
+            + "WHERE id=?";
+    
+     jdbcTemplate.update(sql, pouzivatel.getPassword(), pouzivatel.getId());
     }
-
-    @Override
+    
+     @Override
     public Boolean checkMenoAHeslo(String meno, String heslo) {
         Pouzivatel zadany = null;
         for (Pouzivatel pouzivatel : dajPouzivatelov()) {
-           System.out.println(pouzivatel.getMeno());
-            if ((pouzivatel.getMeno() != null) && (pouzivatel.getMeno().equals(meno))) {
+            System.out.println(pouzivatel.getLogin());
+            System.out.println(pouzivatel.getPassword());
+            if ((pouzivatel.getLogin() != null) && (pouzivatel.getLogin().equals(meno))) {
                 zadany = pouzivatel;
                 break;
             }
         }
+        
         if (zadany == null) {
             return false;
+        } else {
+            if (zadany.getPassword().equals(heslo)){
+            return true;
+            } else {
+           return false;
         }
-        return zadany.getHeslo().equals(heslo);
+        }
     }
+    
+     @Override
+     public Pouzivatel najdiPouzivatela(String meno){
+     Pouzivatel hladany = null;
+     for (Pouzivatel pouzivatel : dajPouzivatelov()) {
+     if  (pouzivatel.getLogin().equals(meno)) {
+         hladany = pouzivatel;
+     }
+     }
+     return hladany;
+     }
+      
 }

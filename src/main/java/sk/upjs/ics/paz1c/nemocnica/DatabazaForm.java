@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.nemocnica;
 
+import java.awt.Dialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +13,9 @@ import javax.swing.JOptionPane;
  * @author szoplakz
  */
 public class DatabazaForm extends javax.swing.JDialog {
+    DiagnozaDAO diagnozaDao = DaoFactory.INSTANCE.getDiagnozaDao();
+    LiekDAO liekDao = DaoFactory.INSTANCE.getLiekDao();
+    LiecbaDAO liecbaDao = DaoFactory.INSTANCE.getLiecbaDao();
 
     /**
      * Creates new form DatabazaForm
@@ -19,6 +23,7 @@ public class DatabazaForm extends javax.swing.JDialog {
     public DatabazaForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setSize(540, 480);
     }
 
     /**
@@ -37,7 +42,7 @@ public class DatabazaForm extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         LiecbaList = new javax.swing.JList<>();
         PridajDiagnozuButton = new javax.swing.JButton();
-        UpravDiagnozuButton = new javax.swing.JButton();
+        VymazLiekButton = new javax.swing.JButton();
         PridajLiekButton = new javax.swing.JButton();
         UpravLiekButton = new javax.swing.JButton();
         PridajLiecbuButton = new javax.swing.JButton();
@@ -46,6 +51,9 @@ public class DatabazaForm extends javax.swing.JDialog {
         DiagnozyLabel1 = new javax.swing.JLabel();
         LiekyLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        UpravDiagnozuButton = new javax.swing.JButton();
+        VymazLicebuButton = new javax.swing.JButton();
+        VymazDiagnozuButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -79,16 +87,16 @@ public class DatabazaForm extends javax.swing.JDialog {
         getContentPane().add(PridajDiagnozuButton);
         PridajDiagnozuButton.setBounds(10, 360, 140, 47);
 
-        UpravDiagnozuButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        UpravDiagnozuButton.setForeground(new java.awt.Color(0, 102, 0));
-        UpravDiagnozuButton.setText("Uprav");
-        UpravDiagnozuButton.addActionListener(new java.awt.event.ActionListener() {
+        VymazLiekButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        VymazLiekButton.setForeground(new java.awt.Color(0, 102, 0));
+        VymazLiekButton.setText("Vymaz");
+        VymazLiekButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpravDiagnozuButtonActionPerformed(evt);
+                VymazLiekButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(UpravDiagnozuButton);
-        UpravDiagnozuButton.setBounds(10, 410, 140, 47);
+        getContentPane().add(VymazLiekButton);
+        VymazLiekButton.setBounds(200, 460, 130, 47);
 
         PridajLiekButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         PridajLiekButton.setForeground(new java.awt.Color(0, 102, 0));
@@ -154,7 +162,40 @@ public class DatabazaForm extends javax.swing.JDialog {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Background.jpg"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 540, 480);
+        jLabel1.setBounds(0, 0, 540, 300);
+
+        UpravDiagnozuButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        UpravDiagnozuButton.setForeground(new java.awt.Color(0, 102, 0));
+        UpravDiagnozuButton.setText("Uprav");
+        UpravDiagnozuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpravDiagnozuButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(UpravDiagnozuButton);
+        UpravDiagnozuButton.setBounds(10, 410, 140, 47);
+
+        VymazLicebuButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        VymazLicebuButton.setForeground(new java.awt.Color(0, 102, 0));
+        VymazLicebuButton.setText("Vymaz");
+        VymazLicebuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VymazLicebuButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(VymazLicebuButton);
+        VymazLicebuButton.setBounds(370, 460, 160, 47);
+
+        VymazDiagnozuButton.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        VymazDiagnozuButton.setForeground(new java.awt.Color(0, 102, 0));
+        VymazDiagnozuButton.setText("Vymaz");
+        VymazDiagnozuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VymazDiagnozuButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(VymazDiagnozuButton);
+        VymazDiagnozuButton.setBounds(10, 460, 140, 47);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,17 +206,19 @@ public class DatabazaForm extends javax.swing.JDialog {
              form.setVisible(true);
     }//GEN-LAST:event_PridajDiagnozuButtonActionPerformed
 
-    private void UpravDiagnozuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpravDiagnozuButtonActionPerformed
-          if(DiagnozyList.getSelectedIndex()==-1){
-            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť diagnozu.");
+    private void VymazLiekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VymazLiekButtonActionPerformed
+          if(LiekList.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť liek.");
         } else {
             // vybratie zaznamu v tabulke
-            int index = DiagnozyList.getSelectedIndex();
-            Diagnoza diagnoza = ((DiagnozaListModel) DiagnozyList.getModel()).getElementAt(index);
-             PridajUpravDatabazuForm form = new PridajUpravDatabazuForm(this,true,true,"diagnoza",diagnoza,null,null);
-             form.setVisible(true);
+            int index = LiekList.getSelectedIndex();
+            Liek liek = ((LiekListModel) LiekList.getModel()).getElementAt(index);
+            liekDao.vymazLiek(liek);
+            DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent(),true);
+            this.setVisible(false);
+            databazaForm.setVisible(true);
           }
-    }//GEN-LAST:event_UpravDiagnozuButtonActionPerformed
+    }//GEN-LAST:event_VymazLiekButtonActionPerformed
 
     private void PridajLiekButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PridajLiekButtonActionPerformed
          PridajUpravDatabazuForm form = new PridajUpravDatabazuForm(this,true,false,"liek",null,null,null);
@@ -211,6 +254,47 @@ public class DatabazaForm extends javax.swing.JDialog {
           }
     }//GEN-LAST:event_UpravLiecbuButtonActionPerformed
 
+    private void UpravDiagnozuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpravDiagnozuButtonActionPerformed
+         if(DiagnozyList.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť diagnozu.");
+        } else {
+            // vybratie zaznamu v tabulke
+            int index = DiagnozyList.getSelectedIndex();
+            Diagnoza diagnoza = ((DiagnozaListModel) DiagnozyList.getModel()).getElementAt(index);
+             PridajUpravDatabazuForm form = new PridajUpravDatabazuForm(this,true,true,"diagnoza",diagnoza,null,null);
+             form.setVisible(true);
+          }
+    }//GEN-LAST:event_UpravDiagnozuButtonActionPerformed
+
+    private void VymazLicebuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VymazLicebuButtonActionPerformed
+       if(LiecbaList.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť liecbu.");
+        } else {
+            // vybratie zaznamu v tabulke
+            int index = LiecbaList.getSelectedIndex();
+           Liecba liecba = ((LiecbaListModel) LiecbaList.getModel()).getElementAt(index);
+           liecbaDao.vymazLiecbu(liecba);
+            DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent(),true);
+            this.setVisible(false);
+            databazaForm.setVisible(true);
+             
+          }
+    }//GEN-LAST:event_VymazLicebuButtonActionPerformed
+
+    private void VymazDiagnozuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VymazDiagnozuButtonActionPerformed
+        if(DiagnozyList.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť diagnozu.");
+        } else {
+            // vybratie zaznamu v tabulke
+            int index = DiagnozyList.getSelectedIndex();
+            Diagnoza diagnoza = ((DiagnozaListModel) DiagnozyList.getModel()).getElementAt(index);
+            diagnozaDao.vymazDiagnozu(diagnoza);
+            DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent(),true);
+            this.setVisible(false);
+            databazaForm.setVisible(true);
+        }
+    }//GEN-LAST:event_VymazDiagnozuButtonActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -226,6 +310,9 @@ public class DatabazaForm extends javax.swing.JDialog {
     private javax.swing.JButton UpravDiagnozuButton;
     private javax.swing.JButton UpravLiecbuButton;
     private javax.swing.JButton UpravLiekButton;
+    private javax.swing.JButton VymazDiagnozuButton;
+    private javax.swing.JButton VymazLicebuButton;
+    private javax.swing.JButton VymazLiekButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

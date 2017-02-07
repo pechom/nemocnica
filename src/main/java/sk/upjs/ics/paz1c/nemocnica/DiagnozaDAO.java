@@ -12,4 +12,6 @@ public interface DiagnozaDAO {
     void upravDiagnozu(Diagnoza diagnoza);
 
     public void ulozDiagnozu(Diagnoza diagnoza);
+    
+    void vymazDiagnozu(Diagnoza diagnoza);
 }

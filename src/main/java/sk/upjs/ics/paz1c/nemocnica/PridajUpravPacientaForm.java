@@ -1,5 +1,7 @@
 package sk.upjs.ics.paz1c.nemocnica;
 
+import java.awt.Dialog;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,6 +25,7 @@ public class PridajUpravPacientaForm extends javax.swing.JDialog {
     public PridajUpravPacientaForm(java.awt.Dialog parent, boolean modal, boolean uprav, Pacient pacient) {
         super(parent, modal);
         initComponents();
+        this.setSize(510, 230);
         this.uprav = uprav;
         
          if(uprav){
@@ -103,17 +106,22 @@ public class PridajUpravPacientaForm extends javax.swing.JDialog {
 
     private void PridajUpravButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PridajUpravButtonActionPerformed
         if(uprav){
-          pacient.setMeno(MenoTextField.getName());
-          pacient.setPriezvisko(PriezviskoTextField.getName());
+          pacient.setMeno(MenoTextField.getText());
+          pacient.setPriezvisko(PriezviskoTextField.getText());
           pacient.setVek( (Integer)VekSpinner.getValue());
           pacientDao.upravPacienta(pacient);
         } else {
             pacient = new Pacient();
-             pacient.setMeno(MenoTextField.getName());
-          pacient.setPriezvisko(PriezviskoTextField.getName());
+             pacient.setMeno(MenoTextField.getText());
+          pacient.setPriezvisko(PriezviskoTextField.getText());
          pacient.setVek((Integer)(VekSpinner.getValue()));
           pacientDao.pridajPacienta(pacient);
         }
+        
+        PacientForm pacientform = new PacientForm((Dialog) this.getParent().getParent(),true);
+            this.getParent().setVisible(false);
+            pacientform.setVisible(true);
+            
             this.setVisible(false);
             
     }//GEN-LAST:event_PridajUpravButtonActionPerformed

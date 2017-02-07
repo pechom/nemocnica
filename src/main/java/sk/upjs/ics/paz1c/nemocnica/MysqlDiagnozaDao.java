@@ -55,7 +55,7 @@ public class MysqlDiagnozaDao implements DiagnozaDAO {
             jdbcTemplate.update(sql, diagnoza.getNazov(), diagnoza.getId());
         }
     }
-    
+    @Override
    public void vymazDiagnozu(Diagnoza diagnoza) {
         String sql = "DELETE FROM diagnoza WHERE id=? LIMIT 1";
         jdbcTemplate.update(sql, diagnoza.getId());

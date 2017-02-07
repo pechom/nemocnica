@@ -21,6 +21,7 @@ public class ProfilForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.pouzivatel=pouzivatel;
+        this.setSize(570,340);
     }
 
     /**
@@ -128,8 +129,9 @@ public class ProfilForm extends javax.swing.JDialog {
         DatabazaButton.setBounds(430, 240, 80, 70);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Background.jpg"))); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, -40, 700, 560);
+        jLabel1.setBounds(0, 0, 570, 340);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -147,7 +149,7 @@ public class ProfilForm extends javax.swing.JDialog {
     }//GEN-LAST:event_UpravitButton1ActionPerformed
 
     private void ZaznamyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZaznamyButtonActionPerformed
-       ZaznamyForm zaznamyForm = new ZaznamyForm();
+       ZaznamyForm zaznamyForm = new ZaznamyForm(this,true,pouzivatel);
            zaznamyForm.setVisible(true);
     }//GEN-LAST:event_ZaznamyButtonActionPerformed
 

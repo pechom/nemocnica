@@ -20,9 +20,10 @@ public class EditForm extends javax.swing.JDialog {
     public EditForm(java.awt.Dialog parent, boolean modal, Pouzivatel pouzivatel) {
         super(parent, modal);
         initComponents();
+        this.setSize(340, 200);
         this.pouzivatel=pouzivatel;
-        prihlasovacieMenoTextField.setText(pouzivatel.getMeno());
-        prihlasovacieHesloTextField.setText(pouzivatel.getHeslo());
+        prihlasovacieMenoTextField.setText(pouzivatel.getLogin());
+        prihlasovacieHesloTextField.setText(pouzivatel.getPassword());
         
     }
 
@@ -87,7 +88,7 @@ public class EditForm extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Background.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 420, 200);
+        jLabel1.setBounds(0, 0, 340, 200);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,8 +102,8 @@ public class EditForm extends javax.swing.JDialog {
     }//GEN-LAST:event_prihlasovacieHesloTextFieldActionPerformed
 
     private void ZmenitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZmenitButtonActionPerformed
-        pouzivatel.setMeno(prihlasovacieMenoTextField.getText());
-        pouzivatel.setHeslo(prihlasovacieHesloTextField.getText());
+        pouzivatel.setLogin(prihlasovacieMenoTextField.getText());
+        pouzivatel.setPassword(prihlasovacieHesloTextField.getText());
         pouzivatelDao.upravPouzivatela(pouzivatel);
         pouzivatelDao.zmenHeslo(pouzivatel);
     }//GEN-LAST:event_ZmenitButtonActionPerformed
