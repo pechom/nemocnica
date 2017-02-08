@@ -32,7 +32,7 @@ public class PridajUpravPacientaForm extends javax.swing.JDialog {
          this.pacient=pacient;    
          MenoTextField.setText(pacient.getMeno());
          PriezviskoTextField.setText(pacient.getPriezvisko());
-         VekSpinner.setValue(Integer.toString(pacient.getVek()));
+         
          PridajUpravButton.setText("Uprav");
          } else {
          PridajUpravButton.setText("Pridaj");

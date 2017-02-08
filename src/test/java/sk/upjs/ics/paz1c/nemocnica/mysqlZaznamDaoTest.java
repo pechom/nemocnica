@@ -83,12 +83,11 @@ public class mysqlZaznamDaoTest {
         pouzivatelia = pouzivatelDao.dajPouzivatelov();
         pouzivatel = pouzivatelia.get(0);
         zaznam = new Zaznam();
-        zaznamDao = new MysqlZaznamDao(DaoFactory.INSTANCE.getJdbcTemplate());
-        zaznam.setDiagnoza(diagnoza);
+        zaznamDao = new MysqlZaznamDao(TestFactory.INSTANCE.getJdbcTemplate());
+        zaznam.setDiagnoza(diagnozy.get(0));
         zaznam.setLekar(lekari.get(0));
         zaznam.setLiecba(liecby.get(0));
         zaznam.setLiek(lieky.get(0));
-        System.out.println(pacienti.get(0).getId());
         zaznam.setPacient(pacienti.get(0));
         zaznam.setPouzivatel(pouzivatelia.get(0));
     }
@@ -98,35 +97,28 @@ public class mysqlZaznamDaoTest {
         zaznamDao.pridajZaznam(zaznam);
         zaznamy = zaznamDao.dajZaznamy();
         assertEquals(zaznamy.size(), 1);
-        zaznamDao.vymazZaznam(zaznam);
-
+        zaznamDao.vymazZaznam(zaznamy.get(0));
     }
 
     @Test
     public void testDajZaznamy() {
         System.out.println("Daj zaznamy");
-        Zaznam zaznam = new Zaznam();
-        MysqlZaznamDao zaznamDao = new MysqlZaznamDao(DaoFactory.INSTANCE.getJdbcTemplate());
-
+        zaznamDao.pridajZaznam(zaznam);
+        zaznamy = zaznamDao.dajZaznamy();
+        assertEquals(zaznamy.size(), 1);
+        zaznamDao.vymazZaznam(zaznamy.get(0));
     }
 
-    @Test
-    public void upravZaznam() {
-        Zaznam zaznam = new Zaznam();
-        MysqlZaznamDao zaznamDao = new MysqlZaznamDao(DaoFactory.INSTANCE.getJdbcTemplate());
-    }
 
     @Test
     public void vymazZaznam() {
-        Zaznam zaznam = new Zaznam();
-        MysqlZaznamDao zaznamDao = new MysqlZaznamDao(DaoFactory.INSTANCE.getJdbcTemplate());
-
+        zaznamDao.pridajZaznam(zaznam);
+        zaznamy = zaznamDao.dajZaznamy();
+        zaznamDao.vymazZaznam(zaznamy.get(0));
+        zaznamy = zaznamDao.dajZaznamy();
+        assertEquals(zaznamy.size(), 0);
     }
 
-    @Test
-    public void dajZaznamyPouzivatela() {
-
-    }
 
     @After
     public void TearUp() {

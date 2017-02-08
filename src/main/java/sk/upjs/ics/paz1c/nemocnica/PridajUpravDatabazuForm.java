@@ -5,6 +5,8 @@
  */
 package sk.upjs.ics.paz1c.nemocnica;
 
+import java.awt.Dialog;
+
 /**
  *
  * @author szoplakz
@@ -98,30 +100,48 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
         if (vec.equals("diagnoza")){
         diagnoza.setNazov(NázovTextfield.getText());
         diagnozaDao.upravDiagnozu(diagnoza);
+        DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
+        this.setVisible(false);
+        databazaForm.setVisible(true);
         }
         if (vec.equals("liek")){
         liek.setNazov(NázovTextfield.getText());
         liekDao.upravLiek(liek);
+        DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
+        this.setVisible(false);
+         databazaForm.setVisible(true);
         }
         if (vec.equals("liecba")){
         liecba.setNazov(NázovTextfield.getText());
         liecbaDao.upravLiecbu(liecba);
+        DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
+        this.setVisible(false);
+         databazaForm.setVisible(true);;
         }
        } else {
        if (vec.equals("diagnoza")){
             diagnoza = new Diagnoza();
            diagnoza.setNazov(NázovTextfield.getText());
            diagnozaDao.pridajDiagnozu(diagnoza);
+           DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
+        this.setVisible(false);
+         databazaForm.setVisible(true);
        }
         if (vec.equals("liek")){
         liek = new Liek();
            liek.setNazov(NázovTextfield.getText());
            liekDao.pridajLiek(liek);
+           DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
+        this.setVisible(false);
+         databazaForm.setVisible(true);
        }
         if (vec.equals("liecba")){
         liecba = new Liecba();
            liecba.setNazov(NázovTextfield.getText());
            liecbaDao.pridajLiecbu(liecba);
+           DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
+        this.setVisible(false);
+         databazaForm.setVisible(true);
         }
         
        }
