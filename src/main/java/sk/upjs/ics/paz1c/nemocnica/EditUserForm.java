@@ -9,7 +9,7 @@ package sk.upjs.ics.paz1c.nemocnica;
  *
  * @author szoplakz
  */
-public class EditForm extends javax.swing.JDialog {
+public class EditUserForm extends javax.swing.JDialog {
 
     /**
      * Creates new form EditProfile
@@ -17,7 +17,7 @@ public class EditForm extends javax.swing.JDialog {
     private Pouzivatel pouzivatel;
      private PouzivatelDAO pouzivatelDao = DaoFactory.INSTANCE.getPouzivatelDao();
             
-    public EditForm(java.awt.Dialog parent, boolean modal, Pouzivatel pouzivatel) {
+    public EditUserForm(java.awt.Dialog parent, boolean modal, Pouzivatel pouzivatel) {
         super(parent, modal);
         initComponents();
         this.setSize(340, 200);

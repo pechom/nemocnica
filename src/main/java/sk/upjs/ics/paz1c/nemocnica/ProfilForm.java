@@ -137,13 +137,13 @@ public class ProfilForm extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OdhalsitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OdhalsitButtonActionPerformed
-        PrvyForm prvyForm = new PrvyForm();
+        LoginForm prvyForm = new LoginForm();
             prvyForm.setVisible(true);
             this.setVisible(false);
     }//GEN-LAST:event_OdhalsitButtonActionPerformed
 
     private void UpravitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpravitButton1ActionPerformed
-       EditForm editForm = new EditForm(this ,true,pouzivatel);
+       EditUserForm editForm = new EditUserForm(this ,true,pouzivatel);
             editForm.setVisible(true);
             
     }//GEN-LAST:event_UpravitButton1ActionPerformed

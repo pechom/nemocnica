@@ -9,7 +9,7 @@ package sk.upjs.ics.paz1c.nemocnica;
  *
  * @author szoplakz
  */
-public class ZobrazForm extends javax.swing.JDialog {
+public class ZobrazZaznamForm extends javax.swing.JDialog {
 
     /**
      * Creates new form ZobrazForm
@@ -19,7 +19,7 @@ public class ZobrazForm extends javax.swing.JDialog {
     
         
     
-    public ZobrazForm(java.awt.Dialog parent, boolean modal,Zaznam zaznam, Pouzivatel pouzivatel) {
+    public ZobrazZaznamForm(java.awt.Dialog parent, boolean modal,Zaznam zaznam, Pouzivatel pouzivatel) {
         super(parent, modal);
         initComponents();
         

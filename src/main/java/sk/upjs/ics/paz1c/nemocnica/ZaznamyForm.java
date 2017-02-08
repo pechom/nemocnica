@@ -184,7 +184,7 @@ public class ZaznamyForm extends javax.swing.JDialog {
             int riadok = zaznamyjTable.getSelectedRow();
             Zaznam zaznam = ((ZaznamTableModel) zaznamyjTable.getModel()).getZaznamAt(riadok);
             
-            ZobrazForm zobrazForm = new ZobrazForm(this,true,zaznam,pouzivatel);
+            ZobrazZaznamForm zobrazForm = new ZobrazZaznamForm(this,true,zaznam,pouzivatel);
             
             zobrazForm.setVisible(true);
             
