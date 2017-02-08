@@ -39,9 +39,10 @@ public enum TestFactory {
     // prepojenie k databáze
     public JdbcTemplate getJdbcTemplate(){
         MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost/nemocnicaTest");
+        dataSource.setDatabaseName("nemocnica-test");
+        dataSource.setURL("jdbc:mysql://localhost/databaza-knih?serverTimezone=Europe/Bratislava");
         dataSource.setUser("root");
-        dataSource.setPassword("Kope1234");
+        dataSource.setPassword("yareyare");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return jdbcTemplate;
     }
