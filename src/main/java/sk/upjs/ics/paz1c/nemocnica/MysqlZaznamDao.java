@@ -139,7 +139,6 @@ public class MysqlZaznamDao implements ZaznamDAO {
                 zaznam.setLiek(liekyMap.get(liekId));
                 zaznam.setLiecba(liecbyMap.get(liecbaId));
                 zaznam.setPouzivatel(pouzivateliaMap.get(pouzivatelId));
-                System.out.println(zaznam.getLekar().getMeno());
                 zaznamy.add(zaznam);
             }
 

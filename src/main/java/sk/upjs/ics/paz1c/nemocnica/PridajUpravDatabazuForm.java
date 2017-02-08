@@ -102,6 +102,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
         diagnozaDao.upravDiagnozu(diagnoza);
         DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
         this.setVisible(false);
+        this.getParent().setVisible(false);
         databazaForm.setVisible(true);
         }
         if (vec.equals("liek")){
@@ -109,6 +110,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
         liekDao.upravLiek(liek);
         DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
         this.setVisible(false);
+         this.getParent().setVisible(false);
          databazaForm.setVisible(true);
         }
         if (vec.equals("liecba")){
@@ -116,6 +118,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
         liecbaDao.upravLiecbu(liecba);
         DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
         this.setVisible(false);
+         this.getParent().setVisible(false);
          databazaForm.setVisible(true);;
         }
        } else {
@@ -125,6 +128,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
            diagnozaDao.pridajDiagnozu(diagnoza);
            DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
         this.setVisible(false);
+         this.getParent().setVisible(false);
          databazaForm.setVisible(true);
        }
         if (vec.equals("liek")){
@@ -133,6 +137,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
            liekDao.pridajLiek(liek);
            DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
         this.setVisible(false);
+         this.getParent().setVisible(false);
          databazaForm.setVisible(true);
        }
         if (vec.equals("liecba")){
@@ -141,6 +146,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
            liecbaDao.pridajLiecbu(liecba);
            DatabazaForm databazaForm = new DatabazaForm((Dialog) this.getParent().getParent(), true);
         this.setVisible(false);
+         this.getParent().setVisible(false);
          databazaForm.setVisible(true);
         }
         

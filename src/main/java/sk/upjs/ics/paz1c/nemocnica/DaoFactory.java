@@ -40,7 +40,7 @@ public enum DaoFactory {
     public JdbcTemplate getJdbcTemplate(){
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("nemocnica");
-        dataSource.setURL("jdbc:mysql://localhost/databaza-knih?serverTimezone=Europe/Bratislava");
+        dataSource.setURL("jdbc:mysql://localhost/nemocnica?serverTimezone=Europe/Bratislava");
         dataSource.setUser("root");
         dataSource.setPassword("yareyare");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

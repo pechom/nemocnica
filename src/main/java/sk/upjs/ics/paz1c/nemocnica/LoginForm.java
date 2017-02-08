@@ -98,7 +98,6 @@ public class LoginForm extends javax.swing.JFrame {
             sb.append(zapisaneHeslo[i]);
         }
         String heslo = sb.toString();
-        System.out.println(heslo);
         if(pouzivatelDao.checkMenoAHeslo(prihlasovacieMenoTextField.getText(), heslo)) {
            Pouzivatel pouzivatel = pouzivatelDao.najdiPouzivatela(prihlasovacieMenoTextField.getText());
             ProfilForm profilForm = new ProfilForm(this, true, pouzivatel);

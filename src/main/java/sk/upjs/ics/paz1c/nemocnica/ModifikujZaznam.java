@@ -99,7 +99,7 @@ public class ModifikujZaznam extends javax.swing.JDialog {
 
         DiagnozaComboBox.setModel(diagnozaComboBoxModel);
         getContentPane().add(DiagnozaComboBox);
-        DiagnozaComboBox.setBounds(10, 220, 602, 35);
+        DiagnozaComboBox.setBounds(10, 160, 602, 35);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 0));
@@ -109,7 +109,7 @@ public class ModifikujZaznam extends javax.swing.JDialog {
 
         LiekComboBox.setModel(liekComboBoxModel);
         getContentPane().add(LiekComboBox);
-        LiekComboBox.setBounds(10, 160, 602, 35);
+        LiekComboBox.setBounds(10, 230, 602, 35);
 
         LiecbaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         LiecbaLabel.setForeground(new java.awt.Color(0, 102, 0));

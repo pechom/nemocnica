@@ -5,7 +5,6 @@
  */
 package sk.upjs.ics.paz1c.nemocnica;
 
-import com.sun.corba.se.impl.orb.ParserTable;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
