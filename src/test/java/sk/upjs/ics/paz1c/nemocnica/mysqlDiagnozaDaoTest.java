@@ -15,52 +15,66 @@ import static org.junit.Assert.*;
  * @author erika
  */
 public class mysqlDiagnozaDaoTest {
-    
+
     public mysqlDiagnozaDaoTest() {
     }
-    
+
+    @Before
+    public void setUp() {
+
+    }
+
     @Test
-    public void testPridajDiagnozu(){
+    public void testPridajDiagnozu() {
         System.out.println("Pridaj diagnózu");
         Diagnoza diagnoza = new Diagnoza();
-        MysqlDiagnozaDao instance = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        diagnoza.setId(1);
+        MysqlDiagnozaDao diagnozaDao = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
         diagnoza.setNazov("horúčka");
-        List<Diagnoza> diagnozy1 = instance.dajDiagnozy();
-        instance.pridajDiagnozu(diagnoza);
-         List<Diagnoza> diagnozy2 = instance.dajDiagnozy();
-         Assert.assertEquals(diagnozy1.size()+1,diagnozy2.size());
+        List<Diagnoza> diagnozy1 = diagnozaDao.dajDiagnozy();
+        diagnozaDao.pridajDiagnozu(diagnoza);
+        List<Diagnoza> diagnozy2 = diagnozaDao.dajDiagnozy();
+        Assert.assertEquals(diagnozy1.size() + 1, diagnozy2.size());
+        diagnozaDao.vymazDiagnozu(diagnozy2.get(0));
     }
-    
+
     @Test
-    public void testDajDiagnozy(){
+    public void testDajDiagnozy() {
         System.out.println("Daj diagnózy");
-        MysqlDiagnozaDao dao = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        List<Diagnoza> diagnozy = dao.dajDiagnozy();
-        Assert.assertEquals(0,diagnozy.size());
+        Diagnoza diagnoza = new Diagnoza();
+        diagnoza.setNazov("horúčka");
+        MysqlDiagnozaDao diagnozaDao = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
+        diagnozaDao.pridajDiagnozu(diagnoza);
+        List<Diagnoza> diagnozy = diagnozaDao.dajDiagnozy();
+        Assert.assertEquals(1, diagnozy.size());
+        diagnozaDao.vymazDiagnozu(diagnozy.get(0));
     }
-    
-     @Test
+
+    @Test
     public void testUpravDiagnozu() {
         System.out.println("Edituj diagnózu");
-        
-        MysqlDiagnozaDao instance = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
-         List<Diagnoza> diagnozy = instance.dajDiagnozy();
-         Diagnoza diagnoza = diagnozy.get(0);       
-        diagnoza.setNazov("chrípka");
-        instance.upravDiagnozu(diagnoza);
-        Assert.assertEquals("chrípka",diagnozy.get(0).getNazov());
+        Diagnoza diagnoza = new Diagnoza();
+        diagnoza.setNazov("horúčka");
+        MysqlDiagnozaDao diagnozaDao = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
+        diagnozaDao.ulozDiagnozu(diagnoza);
+        List<Diagnoza> diagnozy = diagnozaDao.dajDiagnozy();
+        Diagnoza diag = diagnozy.get(0);
+        diag.setNazov("chrípka");
+        diagnozaDao.upravDiagnozu(diag);
+        diagnozy = diagnozaDao.dajDiagnozy();
+        Assert.assertEquals("chrípka", diagnozy.get(0).getNazov());
+        diagnozaDao.vymazDiagnozu(diagnozy.get(0));
     }
+
     @Test
     public void testVymazDiagnozu() {
-        
-        MysqlDiagnozaDao instance = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        List<Diagnoza> diagnozy1 = instance.dajDiagnozy();
-        Diagnoza diagnoza = diagnozy1.get(0); 
-        
-        instance.vymazDiagnozu(diagnoza);
-        
-         List<Diagnoza> diagnozy2 = instance.dajDiagnozy();
-         Assert.assertEquals(diagnozy1.size(),diagnozy2.size()+1);
+        System.out.println("Vymaz diagnózu");
+        Diagnoza diagnoza = new Diagnoza();
+        diagnoza.setNazov("horúčka");
+        MysqlDiagnozaDao diagnozaDao = new MysqlDiagnozaDao(TestFactory.INSTANCE.getJdbcTemplate());
+        diagnozaDao.pridajDiagnozu(diagnoza);
+        List<Diagnoza> diagnozy1 = diagnozaDao.dajDiagnozy();
+        diagnozaDao.vymazDiagnozu(diagnozy1.get(0));
+        List<Diagnoza> diagnozy2 = diagnozaDao.dajDiagnozy();
+        Assert.assertEquals(diagnozy1.size(), diagnozy2.size() + 1);
     }
 }

@@ -5,6 +5,7 @@
  */
 package sk.upjs.ics.paz1c.nemocnica;
 
+import com.sun.corba.se.impl.orb.ParserTable;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,46 +14,86 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
  * @author szoplakz
  */
 public class mysqlPouzivatelDaoTest {
-  
- public mysqlPouzivatelDaoTest() {
+
+     private String setup;
+     private String after;
+    private JdbcTemplate jdbcTemplate;
+
+    public mysqlPouzivatelDaoTest() {
     }
-    
- @Test
-    public void testDajPouzivatelov(){
-        
-        MysqlPouzivatelDao dao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        List<Pouzivatel> pouzivatelia = dao.dajPouzivatelov();
-        Assert.assertEquals(pouzivatelia.size(),1);
+
+    @Before
+    public void setUp() {
+        //vzhladom na to ze pouzivatel sa pridava len v databaze tak sucastou tohto testu je aj databazovy script 
+        //ktory musi byt spusteny pred testami
+        jdbcTemplate = TestFactory.INSTANCE.getJdbcTemplate();
+        setup = "insert into pouzivatel (login, password) values (\"peter\", \"yareyare\");";
+        jdbcTemplate.update(setup);
+        after = "delete from pouzivatel where id=?;";
     }
-    
+
     @Test
-    public void testUpravPouzivatela(){
-       MysqlPouzivatelDao dao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        List<Pouzivatel> pouzivatelia = dao.dajPouzivatelov();
+    public void testDajPouzivatelov() {
+        MysqlPouzivatelDao pouzivatelDao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
+        List<Pouzivatel> pouzivatelia = pouzivatelDao.dajPouzivatelov();
+        Assert.assertEquals(1, pouzivatelia.size());
+        jdbcTemplate.update(after, pouzivatelia.get(0).getId());
+    }
+
+    @Test
+    public void testUpravPouzivatela() {
+        MysqlPouzivatelDao pouzivatelDao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
+        List<Pouzivatel> pouzivatelia = pouzivatelDao.dajPouzivatelov();
         Pouzivatel pouzivatel = pouzivatelia.get(0);
         pouzivatel.setLogin("zoli");
-        dao.upravPouzivatela(pouzivatel);
-        Assert.assertEquals(pouzivatelia.get(0).getLogin(),"zoli");
+        pouzivatelDao.upravPouzivatela(pouzivatel);
+        pouzivatelia = pouzivatelDao.dajPouzivatelov();
+        Assert.assertEquals("zoli", pouzivatelia.get(0).getLogin());
+        jdbcTemplate.update(after, pouzivatelia.get(0).getId());
     }
-    
+
     @Test
-    public void testZmenHeslo(){
-       MysqlPouzivatelDao dao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        List<Pouzivatel> pouzivatelia = dao.dajPouzivatelov();
+    public void testZmenHeslo() {
+        MysqlPouzivatelDao pouzivatelDao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
+        List<Pouzivatel> pouzivatelia = pouzivatelDao.dajPouzivatelov();
         Pouzivatel pouzivatel = pouzivatelia.get(0);
         pouzivatel.setPassword("zoli");
-        dao.zmenHeslo(pouzivatel);
-        Assert.assertEquals(pouzivatelia.get(0).getPassword(),"zoli");
+        pouzivatelDao.zmenHeslo(pouzivatel);
+        pouzivatelia = pouzivatelDao.dajPouzivatelov();
+        Assert.assertEquals("zoli", pouzivatelia.get(0).getPassword());
+        jdbcTemplate.update(after, pouzivatelia.get(0).getId());
     }
-}
 
+    @Test
+    public void najdiPouzivatela() {
+        MysqlPouzivatelDao pouzivatelDao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
+        List<Pouzivatel> pouzivatelia = pouzivatelDao.dajPouzivatelov();
+        Pouzivatel pouzivatel = pouzivatelDao.najdiPouzivatela(pouzivatelia.get(0).getLogin());
+        assertNotEquals(pouzivatel, null);
+        jdbcTemplate.update(after, pouzivatelia.get(0).getId());
+    }
+
+    @Test
+    public void checkMenoAHeslo() {
+        MysqlPouzivatelDao pouzivatelDao = new MysqlPouzivatelDao(TestFactory.INSTANCE.getJdbcTemplate());
+        List<Pouzivatel> pouzivatelia = pouzivatelDao.dajPouzivatelov();
+        Pouzivatel pouzivatel = pouzivatelia.get(0);
+        boolean check1 = pouzivatelDao.checkMenoAHeslo(pouzivatel.getLogin(), pouzivatel.getPassword());
+        boolean check2 = pouzivatelDao.checkMenoAHeslo(pouzivatel.getLogin(), null);
+        boolean check3 = pouzivatelDao.checkMenoAHeslo(null, pouzivatel.getPassword());
+        boolean check4 = pouzivatelDao.checkMenoAHeslo(null, null);
+        assertEquals(check1, true);
+        assertEquals(check2, false);
+        assertEquals(check3, false);
+        assertEquals(check4, false);
+        jdbcTemplate.update(after, pouzivatelia.get(0).getId());
+    }
+
+}

@@ -10,66 +10,76 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class mysqlPacientDaoTest {
-       
+
     public mysqlPacientDaoTest() {
     }
-    
+
+    @Before
+    public void setUp() {
+
+    }
+
     @Test
-    public void testPridajPacienta(){
+    public void testPridajPacienta() {
         System.out.println("Pridaj pacienta");
         Pacient pacient = new Pacient();
-        MysqlPacientDao instance = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
-        pacient.setId(1);
+        MysqlPacientDao pacientDao = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
         pacient.setMeno("Jozef");
         pacient.setPriezvisko("Malý");
         pacient.setVek(2);
-        List<Pacient> pacienti1 = instance.dajPacietov();
-        instance.pridajPacienta(pacient);
-        List<Pacient> pacienti2 = instance.dajPacietov();
-        Assert.assertEquals(pacienti1.size()+1, pacienti2.size());
-    }
-    
-    @Test
-    public void testDajPacientov(){
-        System.out.println("Daj pacientov");
-        MysqlPacientDao dao = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        List<Pacient> pacienti = dao.dajPacietov();
-        Assert.assertEquals(pacienti.size(),1);
+        List<Pacient> pacienti1 = pacientDao.dajPacietov();
+        pacientDao.pridajPacienta(pacient);
+        List<Pacient> pacienti2 = pacientDao.dajPacietov();
+        Assert.assertEquals(pacienti1.size() + 1, pacienti2.size());
+        pacientDao.vymazPacienta(pacienti2.get(0));
     }
 
-     @Test
+    @Test
+    public void testDajPacientov() {
+        System.out.println("Daj pacienta");
+        Pacient pacient = new Pacient();
+        MysqlPacientDao pacientDao = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
+        pacient.setMeno("Jozef");
+        pacient.setPriezvisko("Malý");
+        pacient.setVek(2);
+        pacientDao.pridajPacienta(pacient);
+        List<Pacient> pacienti = pacientDao.dajPacietov();
+        Assert.assertEquals(1, pacienti.size());
+        pacientDao.vymazPacienta(pacienti.get(0));
+    }
+
+    @Test
     public void testUpravPacienta() {
         System.out.println("Edituj pacienta");
-        
-        MysqlPacientDao instance = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        List<Pacient> pacienti1 = instance.dajPacietov();
-        Pacient pacient = pacienti1.get(0);
-       
+        Pacient pacient = new Pacient();
+        MysqlPacientDao pacientDao = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
+        pacient.setMeno("Jozef");
+        pacient.setPriezvisko("Malý");
+        pacient.setVek(2);
+        pacientDao.pridajPacienta(pacient);
+        List<Pacient> pacienti1 = pacientDao.dajPacietov();
+        pacient = pacienti1.get(0);
         pacient.setMeno("Jozko");
-      
-        instance.upravPacienta(pacient);
-        Assert.assertEquals(pacienti1.get(0).getMeno(),"Jozko");
-        
+        pacientDao.upravPacienta(pacient);
+        pacienti1 = pacientDao.dajPacietov();
+        Assert.assertEquals("Jozko", pacienti1.get(0).getMeno());
+        pacientDao.vymazPacienta(pacienti1.get(0));
     }
+
     @Test
     public void testVymazPacienta() {
-       
-        
-        MysqlPacientDao instance = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        List<Pacient> pacienti1 = instance.dajPacietov();
-        Pacient pacient = pacienti1.get(0);
-       
-        instance.vymazPacienta(pacient);
-        List<Pacient> pacienti2 = instance.dajPacietov();
-        Assert.assertEquals(pacienti1.size(), pacienti2.size()+1);        
-      
-       
-        
+        Pacient pacient = new Pacient();
+        MysqlPacientDao pacientDao = new MysqlPacientDao(TestFactory.INSTANCE.getJdbcTemplate());
+        pacient.setMeno("Jozef");
+        pacient.setPriezvisko("Malý");
+        pacient.setVek(2);
+        pacientDao.pridajPacienta(pacient);
+        List<Pacient> pacienti1 = pacientDao.dajPacietov();
+        pacient = pacienti1.get(0);
+        pacientDao.vymazPacienta(pacient);
+        List<Pacient> pacienti2 = pacientDao.dajPacietov();
+        Assert.assertEquals(pacienti1.size(), pacienti2.size() + 1);
+
     }
-    
-    
 
 }

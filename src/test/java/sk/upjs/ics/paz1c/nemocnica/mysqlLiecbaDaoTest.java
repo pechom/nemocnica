@@ -5,10 +5,6 @@
  */
 package sk.upjs.ics.paz1c.nemocnica;
 
-
-
-
-
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,60 +15,69 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class mysqlLiecbaDaoTest {
-    
+
     LiekDAO liekDao = DaoFactory.INSTANCE.getLiekDao();
 
     public mysqlLiecbaDaoTest() {
     }
-    
+
+    @Before
+    public void setUp() {
+
+    }
+
     @Test
-    public void testPridajLiecbu(){
+    public void testPridajLiecbu() {
         System.out.println("Pridaj liecbu");
         Liecba liecba = new Liecba();
-        MysqlLiecbaDao instance = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        liecba.setId(1);
+        MysqlLiecbaDao liecbaDao = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
         liecba.setNazov("masaz");
-        List<Liecba> liecby1 = instance.dajLiecby();
-        instance.pridajLiecbu(liecba);
-         List<Liecba> liecby2 = instance.dajLiecby();
-         Assert.assertEquals(liecby2.size(), liecby1.size()+1);
+        List<Liecba> liecby1 = liecbaDao.dajLiecby();
+        liecbaDao.pridajLiecbu(liecba);
+        List<Liecba> liecby2 = liecbaDao.dajLiecby();
+        Assert.assertEquals(liecby2.size(), liecby1.size() + 1);
+        liecbaDao.vymazLiecbu(liecby2.get(0));
     }
-    
+
     @Test
-    public void testDajLiecby(){
+    public void testDajLiecby() {
         System.out.println("Daj liecbu");
-        MysqlLiecbaDao dao = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        List<Liecba> liecby = dao.dajLiecby();
-        Assert.assertEquals(liecby.size(),1);
+        Liecba liecba = new Liecba();
+        MysqlLiecbaDao liecbaDao = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
+        liecba.setNazov("masaz");
+        liecbaDao.pridajLiecbu(liecba);
+        List<Liecba> liecby = liecbaDao.dajLiecby();
+        Assert.assertEquals(1, liecby.size());
+        liecbaDao.vymazLiecbu(liecby.get(0));
     }
-    
-     @Test
-    public void testUpravLiek() {
+
+    @Test
+    public void testUpravLiecbu() {
         System.out.println("Edituj liecbu");
-        
-        MysqlLiecbaDao instance = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        List<Liecba> liecby = instance.dajLiecby();
-        Liecba liecba = liecby.get(0);
+        Liecba liecba = new Liecba();
+        MysqlLiecbaDao liecbaDao = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
+        liecba.setNazov("masaz");
+        liecbaDao.pridajLiecbu(liecba);
+        List<Liecba> liecby = liecbaDao.dajLiecby();
+        liecba = liecby.get(0);
         liecba.setNazov("akupunktura");
-        instance.upravLiecbu(liecba);
-         Assert.assertEquals(liecby.get(0).getNazov(),"akupunktura");
+        liecbaDao.upravLiecbu(liecba);
+        liecby = liecbaDao.dajLiecby();
+        Assert.assertEquals("akupunktura", liecby.get(0).getNazov());
+        liecbaDao.vymazLiecbu(liecby.get(0));
     }
-    
-     @Test
-    public void testVymazLiek(){
-        
-        
-        MysqlLiecbaDao instance = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
-        
-        
-        List<Liecba> liecby1 = instance.dajLiecby();
-        Liecba liecba = liecby1.get(0);
-        
-        instance.vymazLiecbu(liecba);
-         List<Liecba> liecby2 = instance.dajLiecby();
-         Assert.assertEquals(liecby2.size()+1, liecby1.size());
+
+    @Test
+    public void testVymazLiecbu() {
+        Liecba liecba = new Liecba();
+        MysqlLiecbaDao liecbaDao = new MysqlLiecbaDao(TestFactory.INSTANCE.getJdbcTemplate());
+        liecba.setNazov("masaz");
+        liecbaDao.pridajLiecbu(liecba);
+        List<Liecba> liecby1 = liecbaDao.dajLiecby();
+        liecba = liecby1.get(0);
+        liecbaDao.vymazLiecbu(liecba);
+        List<Liecba> liecby2 = liecbaDao.dajLiecby();
+        Assert.assertEquals(liecby2.size() + 1, liecby1.size());
     }
-    
-       
 
 }
