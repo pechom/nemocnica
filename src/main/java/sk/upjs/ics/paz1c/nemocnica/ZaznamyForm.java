@@ -14,7 +14,7 @@ public class ZaznamyForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.pouzivatel=pouzivatel;
-        this.setSize(590, 457);
+        this.setSize(590, 410);
         aktualizovatZaznamy();
         
 

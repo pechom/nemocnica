@@ -29,7 +29,7 @@ public class PridajUpravDatabazuForm extends javax.swing.JDialog {
     public PridajUpravDatabazuForm(java.awt.Dialog parent, boolean modal, boolean uprav, String vec, Diagnoza diagnoza, Liek liek, Liecba liecba) {
         super(parent, modal);
         initComponents();
-        this.setSize(500, 120);
+        this.setSize(500, 150);
         this.diagnoza=diagnoza;
         this.vec=vec;
         this.liek=liek;

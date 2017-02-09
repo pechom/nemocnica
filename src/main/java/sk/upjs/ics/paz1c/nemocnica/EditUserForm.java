@@ -20,7 +20,7 @@ public class EditUserForm extends javax.swing.JDialog {
     public EditUserForm(java.awt.Dialog parent, boolean modal, Pouzivatel pouzivatel) {
         super(parent, modal);
         initComponents();
-        this.setSize(340, 200);
+        this.setSize(360, 230);
         this.pouzivatel=pouzivatel;
         prihlasovacieMenoTextField.setText(pouzivatel.getLogin());
         prihlasovacieHesloTextField.setText(pouzivatel.getPassword());

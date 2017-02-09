@@ -22,7 +22,7 @@ public class PacientForm extends javax.swing.JDialog {
     public PacientForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setSize(650, 270);
+        this.setSize(650, 310);
     }
 
     /**
@@ -102,7 +102,7 @@ public class PacientForm extends javax.swing.JDialog {
 
     private void UpravButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpravButtonActionPerformed
        if(PacientTable.getSelectedRow()==-1){
-            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť lekára.");
+            JOptionPane.showMessageDialog(null, "Je potrebné najskôr označiť pacienta.");
         } else {
             // vybratie zaznamu v tabulke
             int riadok = PacientTable.getSelectedRow();

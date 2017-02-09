@@ -24,7 +24,7 @@ public class ZobrazZaznamForm extends javax.swing.JDialog {
         initComponents();
         
         
-        this.setSize(830, 470);
+        this.setSize(730, 505);
         this.zaznam = zaznam;
         this.pouzivatel=pouzivatel;
         

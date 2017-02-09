@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @author Judita
  */
 public class MysqlLiecbaDao implements LiecbaDAO {
-    
+
     private JdbcTemplate jdbcTemplate;
 
     public MysqlLiecbaDao(JdbcTemplate jdbcTemplate) {
@@ -45,19 +45,19 @@ public class MysqlLiecbaDao implements LiecbaDAO {
 
     @Override
     public void ulozLiecbu(Liecba liecba) {
-        if(liecba.getId() == 0) {
+        if (liecba.getId() == 0) {
             String sqlInsert = "INSERT INTO liecba (nazov) VALUES (?)";
             jdbcTemplate.update(sqlInsert, liecba.getNazov());
         } else {
-           String sql = "UPDATE lekar SET nazov=? WHERE id=? ";
-           jdbcTemplate.update(sql,liecba.getNazov(),liecba.getId()); 
+            String sql = "UPDATE lekar SET nazov=? WHERE id=? ";
+            jdbcTemplate.update(sql, liecba.getNazov(), liecba.getId());
         }
     }
-     @Override
+
+    @Override
     public void vymazLiecbu(Liecba liecba) {
         String sql = "DELETE FROM liecba WHERE id=? LIMIT 1";
         jdbcTemplate.update(sql, liecba.getId());
     }
-   
-    
+
 }

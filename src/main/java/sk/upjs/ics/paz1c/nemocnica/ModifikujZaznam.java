@@ -29,7 +29,7 @@ public class ModifikujZaznam extends javax.swing.JDialog {
     public ModifikujZaznam(java.awt.Dialog parent, boolean modal,  Boolean uprav, Zaznam zaznam, Pouzivatel pouzivatel) {
         super(parent, modal);
         initComponents();
-        this.setSize(640, 440);
+        this.setSize(640, 470);
         this.uprav=uprav;
         this.zaznam=zaznam;
         this.pouzivatel=pouzivatel;

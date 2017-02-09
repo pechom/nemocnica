@@ -24,7 +24,7 @@ public class LekarForm extends javax.swing.JDialog {
     public LekarForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setSize(650, 270);
+        this.setSize(650, 300);
     }
 
     /**

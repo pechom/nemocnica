@@ -25,7 +25,7 @@ public class PridajUpravPacientaForm extends javax.swing.JDialog {
     public PridajUpravPacientaForm(java.awt.Dialog parent, boolean modal, boolean uprav, Pacient pacient) {
         super(parent, modal);
         initComponents();
-        this.setSize(510, 230);
+        this.setSize(520, 250);
         this.uprav = uprav;
         
          if(uprav){

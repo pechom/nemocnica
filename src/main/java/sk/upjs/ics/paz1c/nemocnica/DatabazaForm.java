@@ -23,7 +23,7 @@ public class DatabazaForm extends javax.swing.JDialog {
     public DatabazaForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setSize(540, 480);
+        this.setSize(590, 550);
     }
 
     /**

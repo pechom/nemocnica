@@ -21,7 +21,7 @@ public class ProfilForm extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.pouzivatel=pouzivatel;
-        this.setSize(570,340);
+        this.setSize(570,370);
     }
 
     /**

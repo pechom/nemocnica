@@ -24,7 +24,7 @@ public class PridajUpravLekaraForm extends javax.swing.JDialog {
     public PridajUpravLekaraForm(java.awt.Dialog parent, boolean modal, boolean uprav, Lekar lekar) {
         super(parent, modal);
         initComponents();
-        this.setSize(540, 230);
+        this.setSize(540, 250);
         this.uprav = uprav;
         
          if(uprav){
